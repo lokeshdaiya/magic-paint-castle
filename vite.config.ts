@@ -47,6 +47,22 @@ export default defineConfig(() => {
               purpose: 'maskable',
             },
           ],
+          screenshots: [
+            {
+              src: '/screenshot-desktop.png',
+              sizes: '1280x720',
+              type: 'image/png',
+              form_factor: 'wide',
+              label: 'Magic Paint Castle Canvas & Colors',
+            },
+            {
+              src: '/screenshot-mobile.png',
+              sizes: '720x1280',
+              type: 'image/png',
+              form_factor: 'narrow',
+              label: 'Magic Paint Castle Drawing Pad',
+            },
+          ],
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
