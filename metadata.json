@@ -1,0 +1,6 @@
+{
+  "name": "Drawing App for Kids",
+  "description": "An interactive, playful, and magical drawing app for kids featuring cool brush styles, symmetry patterns, coloring templates, decals, and a magical AI companion to inspire and encourage children.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
