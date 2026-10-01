@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { BrushType, SymmetryType, StampOption, TemplateOption, DrawingChallenge } from "./types";
 import { TEMPLATES } from "./constants";
 import ColorPalette from "./components/ColorPalette";
@@ -8,7 +8,8 @@ import CompanionArea from "./components/CompanionArea";
 import DrawingCanvas from "./components/DrawingCanvas";
 import { PWAInstallButton } from "./components/PWAInstallButton";
 import { OfflineIndicator } from "./components/OfflineIndicator";
-import { Paintbrush, Palette, Sparkles, Smile, MessageCircle, FolderHeart } from "lucide-react";
+import { PrivacyPolicyModal } from "./components/PrivacyPolicyModal";
+import { Paintbrush, Palette, Sparkles, Smile, MessageCircle, FolderHeart, ShieldCheck } from "lucide-react";
 import { loadSavedDrawings } from "./utils/drawingStorage";
 
 export default function App() {
@@ -27,6 +28,9 @@ export default function App() {
 
   // Drawings History Modal state & count
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState<boolean>(false);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState<boolean>(() => {
+    return window.location.hash === "#privacy" || window.location.pathname === "/privacy";
+  });
   const [savedDrawingsCount, setSavedDrawingsCount] = useState<number>(() => {
     try {
       return loadSavedDrawings().length;
@@ -34,6 +38,16 @@ export default function App() {
       return 0;
     }
   });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === "#privacy" || window.location.pathname === "/privacy") {
+        setIsPrivacyModalOpen(true);
+      }
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   // Simple handler to wipe everything clean
   const handleWipeCanvasClean = () => {
@@ -97,6 +111,16 @@ export default function App() {
               <span className="bg-amber-950 text-white text-[11px] px-2 py-0.5 rounded-full font-black min-w-5 text-center shadow-2xs">
                 {savedDrawingsCount}
               </span>
+            </button>
+
+            {/* Privacy Policy Button */}
+            <button
+              onClick={() => setIsPrivacyModalOpen(true)}
+              className="flex items-center gap-1.5 bg-white/70 hover:bg-white text-indigo-950 font-bold px-3 py-2 rounded-2xl border border-indigo-200 shadow-xs hover:shadow-sm transition-all active:scale-95 cursor-pointer text-xs"
+              title="Read Privacy Policy (Family & Kid Safe)"
+            >
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span className="hidden sm:inline">Privacy</span>
             </button>
 
             <PWAInstallButton />
@@ -186,10 +210,24 @@ export default function App() {
 
       </main>
 
-      {/* Safety info footer */}
-      <footer className="text-center text-[11px] font-black text-indigo-950 mt-10 px-4 opacity-70">
-        🐾 Created with lots of love and magic for little painting superstars! 🎈 Soft, safe, and highly artistic.
+      {/* Safety info footer & Privacy policy link */}
+      <footer className="text-center text-xs font-bold text-indigo-950/80 mt-10 px-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <span>🐾 Created with lots of love and magic for little painting superstars! 🎈 Soft, safe, and highly artistic.</span>
+        <span className="hidden sm:inline opacity-40">•</span>
+        <button
+          onClick={() => setIsPrivacyModalOpen(true)}
+          className="text-indigo-900 underline hover:text-indigo-600 cursor-pointer font-extrabold flex items-center gap-1"
+        >
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 inline" />
+          Privacy Policy
+        </button>
       </footer>
+
+      {/* Privacy Policy Modal */}
+      <PrivacyPolicyModal
+        isOpen={isPrivacyModalOpen}
+        onClose={() => setIsPrivacyModalOpen(false)}
+      />
 
       {/* Offline Connectivity Toast */}
       <OfflineIndicator />

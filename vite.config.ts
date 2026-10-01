@@ -23,6 +23,10 @@ export default defineConfig(() => {
           orientation: 'any',
           start_url: '/',
           scope: '/',
+          lang: 'en',
+          dir: 'ltr',
+          categories: ['education', 'entertainment', 'kids'],
+          prefer_related_applications: false,
           icons: [
             {
               src: '/pwa-192x192.png',

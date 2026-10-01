@@ -9,6 +9,10 @@
   "orientation": "any",
   "theme_color": "#fecfef",
   "background_color": "#fecfef",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "entertainment", "kids"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/pwa-192x192.png",

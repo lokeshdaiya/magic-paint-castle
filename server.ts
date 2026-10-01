@@ -351,6 +351,11 @@ async function startServer() {
   // Always serve public directory static assets (manifest, sw.js, icons, etc.)
   app.use(express.static(path.join(process.cwd(), "public")));
 
+  // Direct endpoint for Google Play Store Privacy Policy requirement
+  app.get(["/privacy", "/privacy-policy"], (req, res) => {
+    res.sendFile(path.join(process.cwd(), "public", "privacy.html"));
+  });
+
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },

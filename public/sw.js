@@ -9,7 +9,8 @@ const STATIC_ASSETS = [
   '/pwa-512x512.png',
   '/pwa-maskable-512x512.png',
   '/apple-touch-icon.png',
-  '/favicon.ico'
+  '/favicon.ico',
+  '/privacy.html'
 ];
 
 // Install: precache essential static assets
