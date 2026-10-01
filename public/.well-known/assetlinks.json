@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.lokeshdaiya.magicpaintcastle",
+      "sha256_cert_fingerprints": [
+        "53:FD:E7:3B:B0:4E:4F:CA:5E:1A:87:5A:25:25:BA:0F:0B:14:AF:04:78:49:0D:FB:A2:0E:58:70:8E:8E:31:A5"
+      ]
+    }
+  }
+]

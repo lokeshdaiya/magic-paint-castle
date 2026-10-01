@@ -12,7 +12,9 @@ const STATIC_ASSETS = [
   '/favicon.ico',
   '/privacy.html',
   '/screenshot-desktop.png',
-  '/screenshot-mobile.png'
+  '/screenshot-mobile.png',
+  '/screenshot-mobile-2.png',
+  '/feature-graphic.png'
 ];
 
 // Install: precache essential static assets

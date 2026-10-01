@@ -349,7 +349,13 @@ app.get("/share/:id", (req, res) => {
 // Serve static assets and connect Vite middleware
 async function startServer() {
   // Always serve public directory static assets (manifest, sw.js, icons, etc.)
-  app.use(express.static(path.join(process.cwd(), "public")));
+  app.use(express.static(path.join(process.cwd(), "public"), { dotfiles: "allow" }));
+
+  // Digital Asset Links endpoint for Android TWA verification (Google Play Store Full-Screen)
+  app.get("/.well-known/assetlinks.json", (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.sendFile(path.join(process.cwd(), "public", ".well-known", "assetlinks.json"));
+  });
 
   // Direct endpoint for Google Play Store Privacy Policy requirement
   app.get(["/privacy", "/privacy-policy"], (req, res) => {

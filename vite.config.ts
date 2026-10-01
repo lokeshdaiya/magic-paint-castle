@@ -62,6 +62,13 @@ export default defineConfig(() => {
               form_factor: 'narrow',
               label: 'Magic Paint Castle Drawing Pad',
             },
+            {
+              src: '/screenshot-mobile-2.png',
+              sizes: '720x1280',
+              type: 'image/png',
+              form_factor: 'narrow',
+              label: 'Magic Paint Castle Coloring Pages',
+            },
           ],
         },
         workbox: {
